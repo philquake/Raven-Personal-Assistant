@@ -1,7 +1,3 @@
-#https://public-apis.io/evil-insult-generator-api
-#https://complimentr.com/
-#https://m3o.com/
-from typing import final
 import requests
 from bs4 import BeautifulSoup
 import pyttsx3
