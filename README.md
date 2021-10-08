@@ -1,6 +1,8 @@
 #https://public-apis.io/evil-insult-generator-api
 #https://complimentr.com/
 
+Downgrade to python 2.7 to utilize speechrecognition
+
 Libraries that are needed for this project:
   requests
   html5lib

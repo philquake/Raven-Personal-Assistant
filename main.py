@@ -4,6 +4,7 @@ import pyttsx3
 import datetime
 from datetime import datetime
 import time
+import speech_recognition as sr
 
 engine = pyttsx3.init() # voice object creation
 rate = engine.getProperty('rate')   # getting details of current speaking rate
@@ -56,11 +57,37 @@ def speech(finalsplit):
     engine.say(finalsplit)
     engine.runAndWait()
 
+def listening():
+    r=sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio=r.listen(source)
+        try:
+            statement=r.recognize_google(audio,language='en-in')
+            print(statement)
+        except Exception as e:
+            speech("Pardon me, please say that again")
+            return "None"
+        return statement
+
+
 def main ():
-    #insult()
-    #compliment()
-    #wishMe()
-    cur_time()
+    command = ''
+    while command is not 'power down' or 'no':
+        command = listening()
+        if(command == "what is the time"):
+            cur_time()
+        elif(command == "give me an insult"):
+            insult()
+        elif(command == "give me a compliment"):
+            compliment()
+        elif(command == 'power down' or 'no'):
+            speech('goodbye')
+            break
+        time.sleep(3)
+        speech("Is there anything else I can help with?")
+       
+        
 
 main()
 
