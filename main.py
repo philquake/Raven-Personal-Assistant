@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 import pyttsx3
+import datetime
+from datetime import datetime
+import time
 
 engine = pyttsx3.init() # voice object creation
 rate = engine.getProperty('rate')   # getting details of current speaking rate
@@ -29,14 +32,35 @@ def compliment():
     finalsplit = initalsplit.rpartition('"}')[0] #splits extra text after insult
     speech(finalsplit)
 
+def cur_time():
+    speech(("The time is now",datetime.today().strftime("%I:%M %p")))
+    time.sleep(0.1)
+    hour=datetime.now().hour
+    if hour>=0 and hour<12:
+        speech("Have a good morning")
+    elif hour>=12 and hour<18:
+        speech("Have a nice afternoon")
+    else:
+        speech("Have a good evening")
+
+def wishMe():
+    hour=datetime.datetime.now().hour
+    if hour>=0 and hour<12:
+        speech("Hello,Good Morning")
+    elif hour>=12 and hour<18:
+        speech("Hello,Good Afternoon")
+    else:
+        speech("Hello,Good Evening")
+
 def speech(finalsplit):
-    print('this')
     engine.say(finalsplit)
     engine.runAndWait()
 
 def main ():
     #insult()
-    compliment()
+    #compliment()
+    #wishMe()
+    cur_time()
 
 main()
 
