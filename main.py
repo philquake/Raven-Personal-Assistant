@@ -5,13 +5,16 @@ import datetime
 from datetime import datetime
 import time
 import speech_recognition as sr
+import webbrowser
 
-engine = pyttsx3.init() # voice object creation
+engine = pyttsx3.init('sapi5') # voice object creation
 rate = engine.getProperty('rate')   # getting details of current speaking rate
 engine.setProperty('rate', 155)     # setting up new voice rate
 voices = engine.getProperty('voices')       #getting details of current voice
 #engine.setProperty('voice', voices[0].id)  #changing index, changes voices. o for male
 engine.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female
+
+WAKE = "Raven"
 
 def insult():
     URL = "https://evilinsult.com/generate_insult.php?lang=en&type=json"
@@ -53,6 +56,23 @@ def wishMe():
     else:
         speech("Hello,Good Evening")
 
+def weather():
+    api_key="cb913a8dea4e3db602ff6993220e62c7"
+    base_url="https://api.openweathermap.org/data/2.5/weather?"
+    speech('Which city?')
+    city_name = listening()
+    complete_url=base_url+"appid="+api_key+"&q="+city_name
+    response = requests.get(complete_url)
+    x=response.json()
+    if x["cod"]!="404":
+        y=x["main"]
+        current_temperature = y["temp"]
+        current_humidiy = y["humidity"]
+        z = x["weather"]
+        weather_description = z[0]["description"]
+        curr_weather = (" Temperature in kelvin unit is " + str(current_temperature) + "\n humidity in percentage is " + str(current_humidiy) + "\n description  " + str(weather_description))
+        speech(curr_weather)
+
 def speech(finalsplit):
     engine.say(finalsplit)
     engine.runAndWait()
@@ -70,25 +90,42 @@ def listening():
             return "None"
         return statement
 
+def wakeup():
+    r=sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening for wake up...")
+        audio=r.listen(source)
+        try:
+            statement=r.recognize_google(audio,language='en-in')
+            print('Wake up ' + statement)
+        except Exception as e:
+            print('No voice command')
+            return "None"
+        return statement
 
 def main ():
     command = ''
-    while command is not 'power down' or 'no':
-        command = listening()
-        if(command == "what is the time"):
-            cur_time()
-        elif(command == "give me an insult"):
-            insult()
-        elif(command == "give me a compliment"):
-            compliment()
-        elif(command == 'power down' or 'no'):
-            speech('goodbye')
-            break
-        time.sleep(3)
-        speech("Is there anything else I can help with?")
-       
-        
-
+    while True:
+        command = wakeup()
+        if command.count(WAKE) > 0:
+            speech("I am ready")
+            while command is not "power down" or "bye" or "no" or "goodbye":
+                command = listening()
+                if "time" in command:
+                    cur_time()
+                elif "insult" in command:
+                    insult()
+                elif "compliment" in command:
+                    compliment()
+                elif "weather" in command:
+                    weather()
+                elif "power down" or "bye" or "no" or "goodbye" in command:
+                    speech('goodbye')
+                    break
+                time.sleep(1)
+                if (command != 'power down'):
+                    speech("Is there anything else I can help with?")      
+    
 main()
 
 
