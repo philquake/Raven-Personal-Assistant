@@ -5,7 +5,6 @@ import datetime
 from datetime import datetime
 import time
 import speech_recognition as sr
-import webbrowser
 
 engine = pyttsx3.init('sapi5') # voice object creation
 rate = engine.getProperty('rate')   # getting details of current speaking rate
