@@ -12,7 +12,7 @@ rate = engine.getProperty('rate')   # getting details of current speaking rate
 engine.setProperty('rate', 155)     # setting up new voice rate
 voices = engine.getProperty('voices')       #getting details of current voice
 #engine.setProperty('voice', voices[0].id)  #changing index, changes voices. o for male
-engine.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female
+engine.setProperty('voice', voices[1].id)  #changing index, changes voices. 1 for female
 
 WAKE = "Raven"
 
@@ -131,7 +131,7 @@ def main ():
         command = wakeup()
         if command.count(WAKE) > 0:
             speech("I am ready")
-            while command is not "power down" or "bye" or "no" or "goodbye":
+            while command != "power down" | "bye" | "no" | "goodbye":
                 command = listening()
                 if "time" in command:
                     cur_time()
@@ -143,7 +143,7 @@ def main ():
                     weather()
                 elif "question" in command:
                     wolf()    
-                elif "power down" or "bye" or "no" or "goodbye" in command:
+                elif "power down" | "bye" | "no" | "goodbye" in command:
                     speech('goodbye')
                     break
                 time.sleep(1)
