@@ -5,6 +5,7 @@ import datetime
 from datetime import datetime
 import time
 import speech_recognition as sr
+import wolframalpha
 
 engine = pyttsx3.init('sapi5') # voice object creation
 rate = engine.getProperty('rate')   # getting details of current speaking rate
@@ -69,12 +70,34 @@ def weather():
         current_humidiy = y["humidity"]
         z = x["weather"]
         weather_description = z[0]["description"]
-        curr_weather = (" Temperature in kelvin unit is " + str(current_temperature) + "\n humidity in percentage is " + str(current_humidiy) + "\n description  " + str(weather_description))
+        curr_weather = (" Temperature in celcius unit is " + str(current_temperature-273.15) + "\n humidity in percentage is " + str(current_humidiy) + "\n description  " + str(weather_description))
+        print(curr_weather)
         speech(curr_weather)
 
+def wolf():
+    # Taking input from user
+    speech("what is your question")
+    question = listening()
+    # App id obtained by the above steps
+    app_id = '856QLK-23G8G5KWTA'
+
+    # Instance of wolf ram alpha
+    # client class
+    client = wolframalpha.Client(app_id)
+
+    # Stores the response from
+    # wolf ram alpha
+    res = client.query(question)
+
+    # Includes only text from the response
+    answer = next(res.results).text
+    print(answer)
+    speech(answer)
+
 def speech(finalsplit):
-    engine.say(finalsplit)
-    engine.runAndWait()
+    # engine.say(finalsplit)
+    # engine.runAndWait()
+    print('qwe')
 
 def listening():
     r=sr.Recognizer()
@@ -118,13 +141,16 @@ def main ():
                     compliment()
                 elif "weather" in command:
                     weather()
+                elif "question" in command:
+                    wolf()    
                 elif "power down" or "bye" or "no" or "goodbye" in command:
                     speech('goodbye')
                     break
                 time.sleep(1)
                 if (command != 'power down'):
-                    speech("Is there anything else I can help with?")      
-    
+                    speech("Is there anything else I can help with?") 
+     
+
 main()
 
 
