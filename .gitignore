@@ -1,7 +1,8 @@
+List of test python files to exclude:
 /audio.mp3
 /pptysx3test.py
 /srecog.py
 /listentest.py
 /weather.py
-/search.py
-/spot.py
+/wolf.py
+/translate.py

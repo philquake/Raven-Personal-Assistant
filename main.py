@@ -57,7 +57,7 @@ def wishMe():
         speech("Hello,Good Evening")
 
 def weather():
-    api_key="xxx"
+    api_key="cb913a8dea4e3db602ff6993220e62c7"
     base_url="https://api.openweathermap.org/data/2.5/weather?"
     speech('Which city?')
     city_name = listening()
@@ -95,9 +95,8 @@ def wolf():
     speech(answer)
 
 def speech(finalsplit):
-    # engine.say(finalsplit)
-    # engine.runAndWait()
-    print('qwe')
+    engine.say(finalsplit)
+    engine.runAndWait()
 
 def listening():
     r=sr.Recognizer()
@@ -131,7 +130,7 @@ def main ():
         command = wakeup()
         if command.count(WAKE) > 0:
             speech("I am ready")
-            while command != "power down" | "bye" | "no" | "goodbye":
+            while command != "power down":
                 command = listening()
                 if "time" in command:
                     cur_time()
@@ -143,12 +142,13 @@ def main ():
                     weather()
                 elif "question" in command:
                     wolf()    
-                elif "power down" | "bye" | "no" | "goodbye" in command:
+                elif "power down" in command:
                     speech('goodbye')
                     break
                 time.sleep(1)
                 if (command != 'power down'):
                     speech("Is there anything else I can help with?") 
+ 
      
 
 main()
