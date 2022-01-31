@@ -1,3 +1,12 @@
+A voice command Python bot, the list of commands are:
+insult
+compliment
+weather
+time
+temperature
+
+
+
 #https://public-apis.io/evil-insult-generator-api
 #https://complimentr.com/
 
