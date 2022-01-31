@@ -4,7 +4,7 @@ compliment
 weather
 time
 temperature
-
+wolframe api for basic questions and answer
 
 
 #https://public-apis.io/evil-insult-generator-api
