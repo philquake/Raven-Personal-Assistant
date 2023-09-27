@@ -1,4 +1,5 @@
 from misc import *
+from timedate  import *
 
 """import speech_recognition as sr
 
@@ -21,4 +22,11 @@ except sr.RequestError as e:
 
 
 # print (insult())
-print (compliment())
+
+# print (compliment())
+
+# print (wishMe())
+
+# print (cur_time())
+
+print(weather("Tampa"))

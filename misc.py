@@ -18,3 +18,4 @@ def compliment():
     # initalsplit = soup.get_text().partition(splitword)[2] #splits extra text before insult
     # finalsplit = initalsplit.rpartition('"}')[0] #splits extra text after insult
     return(soup.get_text())
+
