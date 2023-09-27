@@ -33,5 +33,5 @@ def weather(city):
         current_humidiy = y["humidity"]
         z = x["weather"]
         weather_description = z[0]["description"]
-        curr_weather = ("Temperature is " + str(current_temperature-273.15) + " celcius " + "with " + str(current_humidiy) + " humidity and "+ "with " + str(weather_description))
+        curr_weather = ("Temperature is " + str(round(current_temperature-273.15)) + " degrees celcius " + "with " + str(current_humidiy) + " humidity and "+ "with " + str(weather_description))
         return curr_weather
