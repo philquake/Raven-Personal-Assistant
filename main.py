@@ -57,7 +57,7 @@ def wishMe():
         speech("Hello,Good Evening")
 
 def weather():
-    api_key="cb913a8dea4e3db602ff6993220e62c7"
+    api_key="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     base_url="https://api.openweathermap.org/data/2.5/weather?"
     speech('Which city?')
     city_name = listening()
