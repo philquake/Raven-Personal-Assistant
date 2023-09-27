@@ -79,7 +79,7 @@ def wolf():
     speech("what is your question")
     question = listening()
     # App id obtained by the above steps
-    app_id = '856QLK-23G8G5KWTA'
+    app_id = 'xxxxxxxxxxxxxxxxxxxxxxxxxx'
 
     # Instance of wolf ram alpha
     # client class
