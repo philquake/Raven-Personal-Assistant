@@ -67,7 +67,7 @@ def main ():
                 elif "compliment" in command:
                     compliment()
                 elif "weather" in command:
-                    weather('Montego Bay')  
+                    cur_weather()  
                 elif "power down" in command:
                     speech('goodbye')
                     break
@@ -77,4 +77,4 @@ def main ():
  
      
 
-speech(weather('Montego Bay'))
+speech(cur_weather)

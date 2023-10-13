@@ -19,14 +19,14 @@ def cur_time():
     now=  datetime.datetime.now()
     cur = ("The time is now",now.strftime("%H:%M"))
     if now.hour >= 0 and now.hour < 12:
-        hour = "Have a good morning"
+        greeting = "Have a good morning"
     elif now.hour >= 12 and now.hour < 18:
-        hour = "Have a nice afternoon"
+        greeting = "Have a nice afternoon"
     else:
-        hour = "Have a good evening"
-    return cur, hour
+        greeting = "Have a good evening"
+    return cur, greeting
 
-def weather(city):
+def cur_weather():
     configure()
     api = f"https://api.openweathermap.org/data/2.5/weather?q=Montego Bay&&appid={os.getenv('api_key')}"
     response = requests.get(api)
