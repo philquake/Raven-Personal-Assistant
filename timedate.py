@@ -1,5 +1,10 @@
 import datetime
 import requests
+from dotenv import load_dotenv
+import os 
+
+def configure():
+    load_dotenv()
 
 def wishMe():
     hour = datetime.datetime.now().hour
@@ -22,10 +27,9 @@ def cur_time():
     return cur, hour
 
 def weather(city):
-    api_key="cb913a8dea4e3db602ff6993220e62c7"
-    base_url="https://api.openweathermap.org/data/2.5/weather?" 
-    complete_url=base_url+"appid="+api_key+"&q="+city
-    response = requests.get(complete_url)
+    configure()
+    api = f"https://api.openweathermap.org/data/2.5/weather?q=Montego Bay&&appid={os.getenv('api_key')}"
+    response = requests.get(api)
     x=response.json()
     if x["cod"]!="404":
         y=x["main"]
